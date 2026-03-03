@@ -9,10 +9,6 @@ echo "  rustc: $(rustc --version 2>/dev/null || echo 'not found')"
 echo "  cargo: $(cargo --version 2>/dev/null || echo 'not found')"
 echo "  RP2350 target: $(rustup target list --installed | grep thumbv8m || echo 'not found')"
 
-# Verify sysdoc is available
-echo "Verifying sysdoc..."
-echo "  sysdoc: $(sysdoc --version 2>/dev/null || echo 'installed')"
-
 # Verify Claude Code CLI
 echo "Verifying Claude Code CLI..."
 echo "  claude: $(claude --version 2>/dev/null || echo 'installed')"
@@ -27,13 +23,11 @@ fi
 # Initialize git submodules
 echo "Initializing git submodules..."
 cd /workspaces/pico-racer
-git submodule update --init --recursive
 
 echo ""
 echo "=== Setup Complete ==="
 echo ""
 echo "Available tools:"
 echo "  rustc, cargo (Rust toolchain)"
-echo "  sysdoc (documentation)"
 echo "  claude (AI assistant)"
 echo ""
