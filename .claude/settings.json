@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(wc -l:*)",
+      "Bash(git ls-files:*)",
+      "Bash(git submodule status)",
+      "Bash(cargo check -p pico-racer-hal -p pico-racer-core -p pico-racer-pc -p asset-prep)",
+      "Bash(./build.sh)",
+      "Bash(echo \"EXIT_CODE=$?\")",
+      "Bash(cargo fmt)",
+      "Bash(cargo build -p pico-racer-rp2350 --target thumbv8m.main-none-eabihf)",
+      "Bash(cargo test -p pico-racer-core)"
+    ]
+  }
+}

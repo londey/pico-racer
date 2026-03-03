@@ -1,0 +1,50 @@
+{
+    "name": "pico-racer Development",
+    "build": {
+        "dockerfile": "Dockerfile",
+        "context": ".."
+    },
+    "remoteUser": "vscode",
+    "features": {
+        "ghcr.io/devcontainers/features/git:1": {}
+    },
+    "runArgs": [
+        "--privileged"
+    ],
+    "mounts": [
+        "source=pico-racer-cargo-cache,target=/opt/cargo/registry,type=volume"
+    ],
+    "containerEnv": {
+        "GIT_EDITOR": "code --wait"
+    },
+    "remoteEnv": {
+        "ANTHROPIC_API_KEY": "${localEnv:ANTHROPIC_API_KEY}"
+    },
+    "postCreateCommand": "bash .devcontainer/scripts/post-create.sh",
+    "postAttachCommand": "bash .devcontainer/scripts/post-attach.sh",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "eamodio.gitlens",
+                "EditorConfig.EditorConfig",
+                "Anthropic.claude-code",
+                "streetsidesoftware.code-spell-checker",
+                "mutantdino.resourcemonitor",
+                "bierner.markdown-mermaid",
+                "MermaidChart.vscode-mermaid-chart"
+            ],
+            "settings": {
+                "terminal.integrated.defaultProfile.linux": "bash",
+                "terminal.integrated.profiles.linux": {
+                    "bash": {
+                        "path": "/bin/bash",
+                        "args": [
+                            "-l"
+                        ]
+                    }
+                }
+            }
+        }
+    },
+    "workspaceFolder": "/workspaces/pico-racer"
+}

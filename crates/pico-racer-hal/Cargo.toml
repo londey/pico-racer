@@ -1,0 +1,7 @@
+[package]
+name = "pico-racer-hal"
+version.workspace = true
+edition.workspace = true
+description = "Platform abstraction traits for pico-racer host applications"
+
+[dependencies]

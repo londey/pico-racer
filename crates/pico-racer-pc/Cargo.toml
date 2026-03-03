@@ -1,0 +1,16 @@
+[package]
+name = "pico-racer-pc"
+version.workspace = true
+edition.workspace = true
+description = "PC debug host for ICEpi SPI GPU (via FT232H)"
+
+[dependencies]
+# Platform-agnostic crates
+pico-racer-hal = { path = "../pico-racer-hal" }
+pico-racer-core = { path = "../pico-racer-core" }
+
+# ftdi = "0.1"       # TODO: uncomment when FT232H integration is ready
+# crossterm = "0.28"  # TODO: uncomment for terminal input
+
+log = "0.4"
+env_logger = "0.11"
