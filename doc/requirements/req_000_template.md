@@ -10,35 +10,19 @@ Or copy this template and modify.
 
 ---
 
-## Classification
-
-- **Priority:** Essential | Important | Nice-to-have
-- **Stability:** Stable | Evolving | Volatile
-- **Verification:** Test | Analysis | Inspection | Demonstration
-
 ## Requirement
 
 When [condition/trigger], the system SHALL [observable behavior/response].
 
-Format: **When** [condition], the system **SHALL/SHOULD/MAY** [behavior].
-
-- Each requirement must have a testable trigger condition and observable outcome
-- Describe capabilities/behaviors, not data layout or encoding
-- For struct fields, byte formats, protocols → create an interface (INT-NNN) and reference it
+See `.syskit/ref/requirement-format.md` for required format, quality criteria, and level-of-abstraction guidance.
 
 ## Rationale
 
-<Why this requirement exists. What problem does it solve? What drives this need?>
+<Why this requirement exists. Keep to ≤ 2 sentences; explain the *why*, do not restate the requirement or enumerate all design options.>
 
 ## Parent Requirements
 
-- REQ-NNN (<parent requirement name>)
-- Or "None" if this is a top-level requirement
-- Child requirements use hierarchical IDs: REQ-NNN.NN (e.g., REQ-004.01 is a child of REQ-004)
-
-## Allocated To
-
-- UNIT-NNN (<unit name>)
+- REQ-NNN (<parent requirement name>) — or "None" if top-level
 
 ## Interfaces
 
@@ -46,17 +30,8 @@ Format: **When** [condition], the system **SHALL/SHOULD/MAY** [behavior].
 
 ## Verification Method
 
-<How this requirement will be verified>
-
-- **Test:** Verified by executing a test procedure
-- **Analysis:** Verified by technical evaluation
-- **Inspection:** Verified by examination
-- **Demonstration:** Verified by operation
-
-## Verified By
-
-- VER-NNN (<verification name>)
+<How this requirement will be verified: Test | Analysis | Inspection | Demonstration. VER docs that cover this requirement list it in their "Verifies Requirements" section — do not mirror that list here.>
 
 ## Notes
 
-<Additional context, open questions, or references>
+<Optional. Include only if there is genuine context, caveat, or open question to add — do not restate the requirement or title.>

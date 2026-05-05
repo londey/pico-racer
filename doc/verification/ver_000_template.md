@@ -12,11 +12,7 @@ Or copy this template and modify.
 
 ## Verification Method
 
-Choose one:
-- **Test:** Verified by executing a test procedure
-- **Analysis:** Verified by technical evaluation
-- **Inspection:** Verified by examination
-- **Demonstration:** Verified by operation
+Test | Analysis | Inspection | Demonstration
 
 ## Verifies Requirements
 
@@ -32,35 +28,28 @@ List all design units exercised by this verification.
 
 ## Preconditions
 
-<What must be true before this verification can be executed>
-
-- System state, configuration, or environment required
-- Dependencies on other verifications completing first
-- Required test data or fixtures
+<Only list setup specific to this verification (pre-loaded fixtures, unusual configuration, dependencies on other verifications). Do not restate the shared Verilator/toolchain preconditions — see `test_strategy.md`.>
 
 ## Procedure
 
-<Step-by-step verification procedure>
+<Step-by-step verification procedure. End each step with an explicit `**Pass:** …` clause stating the observable outcome that means the step passed. A separate "Fail Criteria" list is not required — anything that violates a Pass clause is a fail.>
 
-1. <Step 1>
-2. <Step 2>
-3. ...
+1. **<Short step title>.**
+   <What the step does.>
+   **Pass:** <observable outcome that means this step is satisfied.>
+
+2. ...
 
 For automated tests, describe what the test does at a level useful for understanding intent, not line-by-line code walkthrough.
-
-## Expected Results
-
-<What constitutes a pass>
-
-- **Pass Criteria:** <observable outcome that means the requirement is satisfied>
-- **Fail Criteria:** <observable outcome that means the requirement is NOT satisfied>
 
 ## Test Implementation
 
 - `<test filepath>`: <description of what this test file does>
 
 List all test source files that implement this verification.
+Each test file listed here should contain a `Ver-ref` comment pointing back to this document.
+See `.syskit/ref/ver-ref.md` for the Ver-ref format and workflow.
 
 ## Notes
 
-<Additional context, edge cases, known limitations of this verification>
+<Optional. Edge cases, known limitations, or context that does not belong in the Procedure.>

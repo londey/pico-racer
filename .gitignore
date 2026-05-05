@@ -1,21 +1,14 @@
-# Rust
+__pycache__
+/.claude/*
+.syskit
+*.bk
+*.fst
+*.pyc
+*.vcd
+**/*.local.json
+build/
+obj_dir/
 target/
-**/*.rs.bk
 
-# Build outputs
-/build/
-
-# IDE
-.idea/
-.vscode/
-
-# OS
-.DS_Store
-Thumbs.db
-
-# Environment
-.env*
-*.log
-
-# Syskit working directory
-.syskit/
+!/.claude/agents/
+!/.claude/skills/

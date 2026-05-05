@@ -98,6 +98,10 @@ RUN echo '# Rust environment' >> /home/${USERNAME}/.bashrc \
     && echo 'export CARGO_HOME="${HOME}/.cargo"' >> /home/${USERNAME}/.bashrc \
     && echo 'export PATH="/opt/cargo/bin:${HOME}/.cargo/bin:${PATH}"' >> /home/${USERNAME}/.bashrc
 
+# Store Claude Code config in the workspace so plans and memory persist across
+# devcontainer rebuilds
+ENV CLAUDE_CONFIG_DIR=/workspaces/pico-racer/.claude
+
 # Final user switch for workdir
 USER ${USERNAME}
 WORKDIR /workspaces
