@@ -59,12 +59,12 @@ const CHECKERBOARD_64_DATA: [u64; 64 * 64 / 2] = {
             let block_x0 = x / 8;
             let block_x1 = (x + 1) / 8;
             let block_y = y / 8;
-            let c0: u32 = if (block_x0 + block_y) % 2 == 0 {
+            let c0: u32 = if (block_x0 + block_y).is_multiple_of(2) {
                 0xFF_FF_FF_FF // White, opaque (RGBA8888)
             } else {
                 0xFF_40_40_40 // Dark gray, opaque
             };
-            let c1: u32 = if (block_x1 + block_y) % 2 == 0 {
+            let c1: u32 = if (block_x1 + block_y).is_multiple_of(2) {
                 0xFF_FF_FF_FF
             } else {
                 0xFF_40_40_40
