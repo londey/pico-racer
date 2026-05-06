@@ -17,7 +17,7 @@ const PERF_LOG_INTERVAL: u32 = 120;
 
 /// Log performance counters at regular intervals.
 fn log_perf(frame_count: u32, cmds_this_frame: u32, idle_spins: u32) {
-    if frame_count % PERF_LOG_INTERVAL == 0 {
+    if frame_count.is_multiple_of(PERF_LOG_INTERVAL) {
         defmt::info!(
             "Core1: frame={}, cmds/frame={}, idle_spins={}",
             frame_count,

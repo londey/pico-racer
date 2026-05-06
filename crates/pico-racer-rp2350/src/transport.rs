@@ -80,8 +80,9 @@ impl SpiTransport for Rp2350Transport {
         ];
 
         self.cs.set_low().unwrap();
-        let _ = self.spi.write(&buf);
+        let result = self.spi.write(&buf);
         self.cs.set_high().unwrap();
+        result.map_err(|_| TransportError::SpiBusError)?;
 
         Ok(())
     }
@@ -91,8 +92,9 @@ impl SpiTransport for Rp2350Transport {
         let mut rx: [u8; 9] = [0; 9];
 
         self.cs.set_low().unwrap();
-        let _ = self.spi.transfer(&mut rx, &tx);
+        let result = self.spi.transfer(&mut rx, &tx);
         self.cs.set_high().unwrap();
+        result.map_err(|_| TransportError::SpiBusError)?;
 
         let mut data: u64 = 0;
         for &byte in &rx[1..9] {

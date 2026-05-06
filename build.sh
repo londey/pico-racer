@@ -94,10 +94,19 @@ if [ "$BUILD_FMT" = true ]; then
 fi
 
 # Step 2: Clippy
+# Run separately for host crates and the RP2350 firmware crate, since the
+# firmware crate is no_std and cannot compile for the host target (rp235x-hal
+# gates `multicore`/`entry` behind `target_arch = "arm"`, and the ARMv8-M MPU
+# fields used in main.rs only exist when targeting cortex-m33).
 if [ "$BUILD_CLIPPY" = true ]; then
     echo -e "${YELLOW}[2/5] Running clippy...${NC}"
     cd "${REPO_ROOT}"
-    cargo clippy -- -D warnings
+    cargo clippy \
+        -p pico-racer-pc -p pico-racer-core -p pico-racer-hal -p asset-prep \
+        -- -D warnings
+    cargo clippy \
+        -p pico-racer-rp2350 --target thumbv8m.main-none-eabihf \
+        -- -D warnings
     echo -e "${GREEN}✓ Clippy passed${NC}"
     echo ""
 fi

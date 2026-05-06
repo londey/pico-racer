@@ -9,7 +9,8 @@
       "Bash(echo \"EXIT_CODE=$?\")",
       "Bash(cargo fmt)",
       "Bash(cargo build -p pico-racer-rp2350 --target thumbv8m.main-none-eabihf)",
-      "Bash(cargo test -p pico-racer-core)"
+      "Bash(cargo test -p pico-racer-core)",
+      "Bash(cargo build *)"
     ]
   }
 }

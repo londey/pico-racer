@@ -174,6 +174,7 @@ fn main() -> ! {
     // --- Split the command queue ---
     // Safety: Called exactly once before Core 1 is spawned. After split,
     // Producer is owned by Core 0 and Consumer by Core 1.
+    #[allow(static_mut_refs)]
     let (producer, consumer) = unsafe { COMMAND_QUEUE.split() };
 
     // --- Spawn Core 1 ---

@@ -7,17 +7,22 @@
 use pico_racer_core::scene::demos::Demo;
 
 /// HID keycode constants for number keys.
+#[cfg(feature = "usb-host")]
 const HID_KEY_1: u8 = 0x1E;
+#[cfg(feature = "usb-host")]
 const HID_KEY_2: u8 = 0x1F;
+#[cfg(feature = "usb-host")]
 const HID_KEY_3: u8 = 0x20;
 
 /// A keyboard event mapped to a demo selection.
 #[derive(Clone, Copy, Debug)]
 pub enum KeyEvent {
+    #[cfg_attr(not(feature = "usb-host"), allow(dead_code))]
     SelectDemo(Demo),
 }
 
 /// Map an HID keycode to a demo selection.
+#[cfg(feature = "usb-host")]
 fn map_keycode(keycode: u8) -> Option<KeyEvent> {
     match keycode {
         HID_KEY_1 => Some(KeyEvent::SelectDemo(Demo::GouraudTriangle)),
