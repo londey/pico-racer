@@ -555,6 +555,7 @@ name = "gpu-registers"
 version = "0.1.0"
 dependencies = [
  "num-traits",
+ "peakrdl-rust",
 ]
 
 [[package]]
@@ -821,6 +822,15 @@ name = "paste"
 version = "1.0.15"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "57c0d7b74b563b49d38dae00a0c37d4d6de9b432382b2892f0574ddcae73fd0a"
+
+[[package]]
+name = "peakrdl-rust"
+version = "0.2.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "d1457722d2675208afcd3c306e859f26e9d3b2c6d58e8c7f8260ca5af738f4dc"
+dependencies = [
+ "num-traits",
+]
 
 [[package]]
 name = "pico-racer-core"

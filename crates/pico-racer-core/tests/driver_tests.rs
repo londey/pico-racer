@@ -12,7 +12,7 @@ use std::rc::Rc;
 
 use pico_racer_core::gpu::driver::{CcRgbCSource, CcSource, CombinerCycle, GpuDriver};
 use pico_racer_core::gpu::registers;
-use pico_racer_core::gpu::registers::{AlphaBlend, AlphaTestFunc, CullMode, ZCompare};
+use pico_racer_core::gpu::registers::{AlphaTestFunc, CullMode, ZCompare};
 
 /// Captured register write: (address, data).
 type WriteRecord = (u8, u64);
@@ -127,10 +127,10 @@ mod mem_fill_tests {
             .last_write_to(registers::MEM_FILL)
             .expect("MEM_FILL write should exist");
 
-        // Expected: base[15:0]=0x0000, value[31:16]=0x1234, count[51:32]=0x00000800
-        let expected: u64 = (0x1234u64 << 16)  // value
-            | (0x0800u64 << 32); // count
-                                 // base = 0x0000 contributes nothing
+        // Expected: base[23:0]=0x000000, value[39:24]=0x1234, count[59:40]=0x00800
+        let expected: u64 = (0x1234u64 << registers::MEM_FILL_VALUE_SHIFT)
+            | (0x0800u64 << registers::MEM_FILL_COUNT_SHIFT);
+        // base = 0 contributes nothing
 
         assert_eq!(
             data, expected,
@@ -151,9 +151,9 @@ mod mem_fill_tests {
             .last_write_to(registers::MEM_FILL)
             .expect("MEM_FILL write should exist");
 
-        let base = data & 0xFFFF;
-        let value = (data >> 16) & 0xFFFF;
-        let count = (data >> 32) & 0xFFFFF;
+        let base = data & 0x00FF_FFFF;
+        let value = (data >> registers::MEM_FILL_VALUE_SHIFT) & 0xFFFF;
+        let count = (data >> registers::MEM_FILL_COUNT_SHIFT) & 0xFFFFF;
 
         assert_eq!(base, 0x100);
         assert_eq!(value, 0xFFFF);
@@ -279,7 +279,6 @@ mod render_mode_tests {
                 false,                   // z_write
                 true,                    // color_write
                 ZCompare::Less,          // z_compare
-                AlphaBlend::Disabled,    // alpha_blend
                 CullMode::CullNone,      // cull_mode
                 true,                    // dither
                 false,                   // stipple_en
@@ -312,8 +311,7 @@ mod render_mode_tests {
         let (mut driver, transport) = make_driver();
 
         // 0x0000_0414 = gouraud(0) | z_test(1) | z_write(0) | color_write(1) |
-        //               cull=CW(01) | alpha_blend=disabled(000) | dither(1) |
-        //               z_compare=Less(000) ...
+        //               cull=CW(01) | dither(1) | z_compare=Less(000) ...
         // Let's pack: z_test=1, color_write=1, cull=CW, dither=1
         driver
             .set_render_mode(
@@ -322,7 +320,6 @@ mod render_mode_tests {
                 false,                   // z_write
                 true,                    // color_write
                 ZCompare::Less,          // z_compare (000)
-                AlphaBlend::Disabled,    // alpha_blend (000)
                 CullMode::CullCw,        // cull_mode (01)
                 true,                    // dither
                 false,                   // stipple_en
@@ -341,7 +338,7 @@ mod render_mode_tests {
         // bit 3: z_write = 0
         // bit 4: color_write = 1
         // bits [6:5]: cull = 01
-        // bits [9:7]: alpha_blend = 000
+        // bits [9:7]: RSVD_9_7 = 000 (formerly alpha_blend)
         // bit 10: dither = 1
         // bits [15:13]: z_compare = 000
         // bit 16: stipple_en = 0

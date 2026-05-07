@@ -2,12 +2,12 @@
 //! GPU register addresses and bit-field constants for SPI access.
 //!
 //! Flat constants derived from the PeakRDL-generated `gpu_registers` crate.
-//! The SystemRDL source (`registers/rdl/gpu_regs.rdl`) is the single source
-//! of truth; these constants translate the byte-addressed MMIO layout into
-//! 7-bit SPI register indices (byte_offset / 8).
+//! The SystemRDL source (`rtl/components/registers/rdl/gpu_regs.rdl` in the
+//! pico-gs submodule) is the single source of truth; these constants translate
+//! the byte-addressed MMIO layout into 7-bit SPI register indices
+//! (byte_offset / 8).
 
 // Re-export generated enum types used by the driver public API.
-pub use gpu_registers::components::alpha_blend_e::AlphaBlendE as AlphaBlend;
 pub use gpu_registers::components::alpha_test_e::AlphaTestE as AlphaTestFunc;
 pub use gpu_registers::components::cull_mode_e::CullModeE as CullMode;
 pub use gpu_registers::components::z_compare_e::ZCompareE as ZCompare;

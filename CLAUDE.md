@@ -4,7 +4,7 @@
 
 - `./build.sh` must pass after every change (builds all software, runs all tests).
 - `external/pico-gs/ARCHITECTURE.md` is the authoritative high-level GPU architecture document.
-- `external/pico-gs/registers/rdl/gpu_regs.rdl` is the authoritative GPU register definition; the `gpu-registers` crate (in the submodule) is what code must reference for register values and constants.
+- `external/pico-gs/rtl/components/registers/rdl/gpu_regs.rdl` is the authoritative GPU register definition; the `gpu-registers` crate (in the submodule) is what code must reference for register values and constants.
 - All Rust code follows the style guide below.
 
 ## Project Structure
@@ -99,12 +99,12 @@ When sign/unsigned is ambiguous, always use the explicit `Q` or `UQ` prefix.
 
 ## Register Interface
 
-The register interface lives in the pico-gs submodule at `external/pico-gs/registers/`.
+The register interface lives in the pico-gs submodule at `external/pico-gs/twin/components/registers/`.
 It is **NOT managed by syskit** in this repository.
 
-- **SystemRDL source:** `external/pico-gs/registers/rdl/gpu_regs.rdl` — canonical machine-readable definition
-- **Rust crate:** `external/pico-gs/registers/src/lib.rs` (`gpu-registers`, `no_std`) — hand-maintained flat constants matching the RDL
-- **Specs:** `external/pico-gs/registers/doc/` — INT-010 through INT-014
+- **SystemRDL source:** `external/pico-gs/rtl/components/registers/rdl/gpu_regs.rdl` — canonical machine-readable definition
+- **Rust crate:** `external/pico-gs/twin/components/registers/src/lib.rs` (`gpu-registers`, `no_std`) — generated from the RDL by PeakRDL-rust, with hand-maintained flat constants in the same file
+- **Specs:** `external/pico-gs/doc/interfaces/` — INT-010 through INT-014
 
 To update registers, work in the pico-gs repository directly.
 

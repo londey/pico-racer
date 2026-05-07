@@ -6,7 +6,7 @@
 
 use pico_racer_hal::{FlowControl, SpiTransport};
 
-use super::registers::{self, AlphaBlend, AlphaTestFunc, CullMode, ZCompare};
+use super::registers::{self, AlphaTestFunc, CullMode, ZCompare};
 use super::vertex::GpuVertex;
 
 /// Error type for GPU driver operations, generic over transport errors.
@@ -390,7 +390,6 @@ impl<S: SpiTransport> GpuDriver<S> {
     /// * `z_write` - Enable Z-buffer writes on depth test pass.
     /// * `color_write` - Enable color buffer writes (false = Z-only prepass).
     /// * `z_compare` - Depth comparison function.
-    /// * `alpha_blend` - Alpha blending mode.
     /// * `cull_mode` - Backface culling mode.
     /// * `dither` - Enable ordered dithering before RGB565 framebuffer write.
     /// * `stipple_en` - Enable 8x8 stipple pattern fragment discard.
@@ -408,7 +407,6 @@ impl<S: SpiTransport> GpuDriver<S> {
         z_write: bool,
         color_write: bool,
         z_compare: ZCompare,
-        alpha_blend: AlphaBlend,
         cull_mode: CullMode,
         dither: bool,
         stipple_en: bool,
@@ -420,7 +418,6 @@ impl<S: SpiTransport> GpuDriver<S> {
             | ((z_write as u64) << 3)
             | ((color_write as u64) << 4)
             | ((cull_mode as u64) << 5)
-            | ((alpha_blend as u64) << 7)
             | ((dither as u64) << 10)
             | ((z_compare as u64) << 13)
             | ((stipple_en as u64) << 16)

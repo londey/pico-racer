@@ -6,4 +6,4 @@ pub mod vertex;
 pub use driver::{
     CcRgbCSource, CcSource, CombinerCycle, FbConfig, GpuDriver, GpuError, VertexKick,
 };
-pub use registers::{AlphaBlend, AlphaTestFunc, CullMode, ZCompare};
+pub use registers::{AlphaTestFunc, CullMode, ZCompare};

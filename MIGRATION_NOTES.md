@@ -39,7 +39,7 @@ Open this repository in the devcontainer, then run these commands:
 ```bash
 # 1. Verify submodule is initialized
 git submodule update --init --recursive
-ls external/pico-gs/registers/Cargo.toml  # Should exist
+ls external/pico-gs/twin/components/registers/Cargo.toml  # Should exist
 
 # 2. Check host-native crates compile
 cargo check -p pico-racer-hal -p pico-racer-core -p pico-racer-pc -p asset-prep
